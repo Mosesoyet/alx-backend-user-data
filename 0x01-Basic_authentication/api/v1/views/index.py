@@ -31,5 +31,4 @@ def unauthorized() -> str:
     """ GET /api/vi/unauthorized
     Return error for unauthorized request
     """
-    from api.v1.app import unauthorized
-    return abort(401, unauthorized())
+    return abort(401)
