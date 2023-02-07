@@ -9,12 +9,6 @@ class Auth:
     """
     A class to implement authentication
     """
-
-
-    def __init__(self):
-        pass
-
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Check for authentication on app
         """
