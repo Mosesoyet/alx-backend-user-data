@@ -9,6 +9,8 @@ class Auth:
     """
     A class to implement authentication
     """
+
+
     def __init__(self):
         pass
 
