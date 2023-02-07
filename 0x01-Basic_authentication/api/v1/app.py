@@ -32,7 +32,7 @@ def unauthorized(error) -> str:
 def forbidden(error) -> str:
     """ The custom forbif=dden error
     """
-    return jsonify({"error": "Forbidden"})
+    return jsonify({"error": "Forbidden"}), 403
 
 
 if __name__ == "__main__":
