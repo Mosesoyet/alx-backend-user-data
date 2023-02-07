@@ -32,3 +32,10 @@ def unauthorized() -> None:
     Return error for unauthorized request
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def forbidden() -> None:
+    """ The view for 403 forbidden code
+    """
+    return abort(403)
