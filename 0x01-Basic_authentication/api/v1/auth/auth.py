@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" The auth module
+""" The auth modules
 """
 from flask import request
 from typing import List, TypeVar
