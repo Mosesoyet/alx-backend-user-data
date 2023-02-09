@@ -25,10 +25,11 @@ def view_one_user(user_id: str = None) -> str:
       - User object JSON represented
       - 404 if the User ID doesn't exist
     """
-    if user_id == 'me' and user_id is None:
+    if user_id is None:
         abort(404)
-    elif user_id == 'me' and user_id is not None:
-        user = User.get(user_id)
+    user = User.get(user_id)
+    if user is None:
+        abort(404)
     return jsonify(user.to_json())
 
 
@@ -119,3 +120,6 @@ def update_user(user_id: str = None) -> str:
         user.last_name = rj.get('last_name')
     user.save()
     return jsonify(user.to_json()), 200
+
+
+@app_views.route
