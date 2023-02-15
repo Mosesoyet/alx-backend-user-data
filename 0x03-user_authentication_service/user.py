@@ -2,7 +2,7 @@
 """ The user module
 """
 from SQLAlchemy import Column, Integer, String
-from SQLAlchemy.ext import declarative_base
+from SQLAlchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
