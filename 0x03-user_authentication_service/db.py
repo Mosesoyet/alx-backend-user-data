@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DB module
 """
-from sqlalchemy import create_engine, tuple_
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
@@ -47,16 +47,10 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """Finds a user based on a set of filters.
         """
-        keys, values = [], []
-        for key, value in kwargs.items():
-            if hasattr(User, key):
-                keys.append(getattr(User, key))
-                values.append(value)
-            else:
-                raise InvalidRequestError()
-        result = self._session.query(User).filter(
-            tuple_(*keys).in_([tuple(values)])
-        ).first()
-        if result is None:
-            raise NoResultFound()
-        return result
+        try:
+            filter_user = self._session.query(User).filter_by(**kwargs).first()
+        except TypeError:
+            raise InvalidRequestError
+        if filter_user is None:
+            raise NoResultFound
+        return filter_user
