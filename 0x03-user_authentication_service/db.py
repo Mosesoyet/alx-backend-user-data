@@ -34,11 +34,8 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Adds a new user to the database and returns the user object
         """
-        try:
-            user = User(email = self.email, hashed_password = self.hashed_password)
-            self._session.add(user)
-            self._session.commit()
-        except Exception:
-            self._session.rollback()
-            user = None
+        user = User(email=self.email, hashed_password=self.hashed_password)
+        self._session.add(user)
+        self._session.commit()
+
         return user
