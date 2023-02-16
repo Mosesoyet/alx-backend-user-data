@@ -45,7 +45,7 @@ class DB:
 
 
     def find_user_by(self, **kwargs) -> User:
-        """Finds a user based on a set of filters.
+        """ Finds a user based on a set of filters.
         """
         try:
             filter_user = self._session.query(User).filter_by(**kwargs).first()
