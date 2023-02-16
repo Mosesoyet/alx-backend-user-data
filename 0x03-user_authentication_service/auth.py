@@ -28,8 +28,9 @@ class Auth:
         """ Adds a new user to the database
         """
         try:
-            self._db.find_user_by(email=email)
+            user = self._db.find_user_by(email=email)
+            if user is None:
+                self._db.add_user(email, _hash_password(password))
+                return user
         except NoResultFound:
-            return self._db.add_user(email, _hash_password(password))
-        raise ValueError("User {} already exists".format(email))
-
+            raise ValueError(f'User {email} already exists')
