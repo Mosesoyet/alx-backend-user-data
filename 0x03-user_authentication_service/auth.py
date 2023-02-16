@@ -29,11 +29,7 @@ class Auth:
         """
         try:
             user = self._db.find_user_by(email=email)
-            if user:
-                msg = f"User {email} already exists"
-                raise ValueError(msg)
-            else:
-                self._db.add_user(email, _hash_password(password))
-                self._db.commit()
-        except Exception:
-            raise NoResultFound
+            msg = f"User {email} already exists"
+            raise ValueError(msg)
+        except NoResultFound:
+            self._db.add_user(email, _hash_password(password))
