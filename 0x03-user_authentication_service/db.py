@@ -34,12 +34,11 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Adds a new user to the database and returns the user object
         """
-        if self.email and self.hashed_password:
-            try:
-                user = User(email=self.email, hased_password=self.hashed_password)
-                self._session.add(user)
-                self._session.commit()
-            except Exception:
-                self._session.rollback()
-                user = None
+        try:
+            user = User(self.email=email, self.hashed_password=hashed_password)
+            self._session.add(user)
+            self._session.commit()
+        except Exception:
+            self._session.rollback()
+            user = None
         return user
