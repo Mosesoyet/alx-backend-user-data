@@ -28,11 +28,8 @@ class Auth:
         """ Adds a new user to the database
         """
         try:
-            user = self._db.find_user_by(email=email)
-            if user:
-                msg = f'User {email} already exists'
-                raise ValueError(msg)
-            new_user = self._db.add_user(email, _hash_password(password))
+            self._db.find_user_by(email=email)
+            raise ValueError(f'User {email} already exists')
         except NoResultFound:
-            pass
-        return new_user
+            new_user = self._db.add_user(email, _hash_password(password))
+            return new_user
