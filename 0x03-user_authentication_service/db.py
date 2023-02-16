@@ -35,7 +35,7 @@ class DB:
         """ Adds a new user to the database and returns the user object
         """
         try:
-            user = User(self.email=email, self.hashed_password=hashed_password)
+            user = User(email = self.email, hashed_password = self.hashed_password)
             self._session.add(user)
             self._session.commit()
         except Exception:
