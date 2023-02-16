@@ -44,11 +44,12 @@ class DB:
         return user
 
 
-    def find_user(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """ a filter query to return the first row of the
         user table
         """
-        filter_user = self._session.query(user).filter_by(**kwargs).first()
+        try:
+            filter_user = self._session.query(User).filter_by(**kwargs).first()
         except TypeError:
             raise InvalidRequestError
         if filter_user is None:
